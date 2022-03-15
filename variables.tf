@@ -223,6 +223,15 @@ variable "origin_request_policy_id" {
     EOT
 }
 
+variable "target_origin_id" {
+  type        = string
+  default     = ""
+  description = <<-EOT
+    The ID of the origin or origin group for the default cache behavior.
+    Set `target_origin_id` to `""` to specify the S3 bucket origin created by this module.
+    EOT
+}
+
 variable "default_ttl" {
   type        = number
   default     = 60
@@ -611,6 +620,7 @@ variable "s3_website_password_enabled" {
 
 variable "origin_groups" {
   type = list(object({
+    origin_id = string
     primary_origin_id  = string
     failover_origin_id = string
     failover_criteria  = list(string)
